@@ -112,18 +112,16 @@ namespace SharpTimer
                                                 $"{((playerButtons & PlayerButtons.Forward) != 0 ? "W" : "_")} " +
                                                 $"{((playerButtons & PlayerButtons.Moveright) != 0 ? "D" : "_")} " +
                                                 $"{((playerButtons & PlayerButtons.Back) != 0 ? "S" : "_")} " +
-                                                $"{((playerButtons & PlayerButtons.Jump) != 0 || playerTimer.MovementService!.OldJumpPressed ? "J" : "_")} " +
+                                                $"{((playerButtons & PlayerButtons.Jump) != 0 ? "J" : "_")} " +
                                                 $"{((playerButtons & PlayerButtons.Duck) != 0 ? "C" : "_")}";
 
                         if (!startzoneJumping && playerTimers[player.Slot].inStartzone)
                         {
-                            if((playerButtons & PlayerButtons.Jump) != 0 || playerTimer.MovementService!.OldJumpPressed)
+                            if((playerButtons & PlayerButtons.Jump) != 0)
                             {
                                 player!.Pawn.Value!.AbsVelocity.Z = 0f;
                             }
                         }
-
-                        if (playerTimer.MovementService!.OldJumpPressed == true) playerTimer.MovementService.OldJumpPressed = false;
 
                         string hudContent = (hudEnabled ? timerLine +
                                             (VelocityHudEnabled ? veloLine : "") +
@@ -179,7 +177,6 @@ namespace SharpTimer
 
                         if (jumpStatsEnabled == true) OnJumpStatTick(player, playerSpeed, player.Pawn?.Value!.CBodyComponent?.SceneNode!.AbsOrigin!, player.PlayerPawn?.Value.EyeAngles!, playerButtons);
                         if (StrafeHudEnabled == true) OnSyncTick(player, playerButtons, player.PlayerPawn?.Value.EyeAngles!);
-                        
 
                         if (forcePlayerSpeedEnabled == true)
                         {
@@ -382,10 +379,8 @@ namespace SharpTimer
                                             $"{((playerButtons & PlayerButtons.Forward) != 0 ? "W" : "_")} " +
                                             $"{((playerButtons & PlayerButtons.Moveright) != 0 ? "D" : "_")} " +
                                             $"{((playerButtons & PlayerButtons.Back) != 0 ? "S" : "_")} " +
-                                            $"{((playerButtons & PlayerButtons.Jump) != 0 || playerTimer.MovementService!.OldJumpPressed ? "J" : "_")} " +
+                                            $"{((playerButtons & PlayerButtons.Jump) != 0 ? "J" : "_")} " +
                                             $"{((playerButtons & PlayerButtons.Duck) != 0 ? "C" : "_")}";
-
-                    if (playerTimer.MovementService!.OldJumpPressed == true) playerTimer.MovementService.OldJumpPressed = false;
 
                     string hudContent = (hudEnabled ? timerLine +
                                         (VelocityHudEnabled ? veloLine : "") +
